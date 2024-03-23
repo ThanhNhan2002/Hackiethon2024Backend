@@ -6,12 +6,12 @@ from Game.playerActions import defense_actions, attack_actions, projectile_actio
 from Game.gameSettings import HP, LEFTBORDER, RIGHTBORDER, LEFTSTART, RIGHTSTART, PARRYSTUN
 import random
 
-# PRIMARY CAN BE: Teleport, Meditate, Dash Attack, Uppercut, One Punch
-# SECONDARY CAN BE : Hadoken, Grenade, Boomerang, Bear Trap, Super Saiyan,
+# PRIMARY CAN BE: Teleport, Meditate, Dash Attack, Uppercut, One Punch, 
+# SECONDARY CAN BE : Hadoken, Grenade, Boomerang, Bear Trap, Super Saiyan, Super Armor
 
 # TODO FOR PARTICIPANT: Set primary and secondary skill here
-PRIMARY_SKILL = DashAttackSkill
-SECONDARY_SKILL = Boomerang
+PRIMARY_SKILL = OnePunchSkill
+SECONDARY_SKILL = SuperSaiyanSkill
 
 #constants, for easier move return
 #movements
@@ -57,7 +57,7 @@ class Script:
         # print(get_last_move(player), get_past_move(player, 1), get_past_move(player, 2))
 
         # return JUMP
-
+        return random.choice([JUMP_BACKWARD, BACK, PRIMARY, SECONDARY, BLOCK])
         return random.choice(action_list)
         if not get_secondary_cooldown(player):
             return SECONDARY

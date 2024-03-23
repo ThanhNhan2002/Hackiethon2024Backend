@@ -70,7 +70,10 @@ class Script:
                 else:
                     return SECONDARY
             elif abs(( get_pos(enemy)[0] - get_pos(player)[0] )) == 1:
-                return BLOCK 
+                if get_primary_skill(enemy) in ['onepunch', 'uppercut']:
+                    return JUMP_BACKWARD
+                else:
+                    return BLOCK 
             elif (get_hp(player) - get_hp(enemy)) >= 20: 
                 return BACK
             else:
