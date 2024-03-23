@@ -47,24 +47,25 @@ class Script:
         return self.primary, self.secondary
     
     def get_thanh_strategy(self, player, enemy, player_projectiles, enemy_projectiles):
+
+        distance = abs((get_pos(player)[0] - get_pos(enemy)[0]))
+
         if len(enemy_projectiles) > 0:
             if get_projectile_type(enemy_projectiles[0]) == 'grenade' and abs(enemy_projectiles[0].get_pos()[0] - get_pos(player)[0]) <= 2:
                 return BACK
             elif abs(enemy_projectiles[0].get_pos()[0] - get_pos(player)[0]) < 2:
                 if enemy_projectiles[0].get_pos()[1] == 0:
-                    print('jump')
-                    return JUMP
+                    if distance < 5:
+                        return JUMP
+                    else:
+                        return JUMP_FORWARD
         
         if get_hp(player) < 100 and (not primary_on_cooldown(player)):
             return PRIMARY
-        elif abs(get_pos(player)[0] - get_pos(enemy)[0]) < 7: # and usable + not stunned
-            print(len(enemy_projectiles), not secondary_on_cooldown(player))
-            if not secondary_on_cooldown(player) and len(enemy_projectiles) == 0:
-                print(get_last_move(player), (get_secondary_skill(enemy) in ['hadoken', 'boomerang']))
+        elif abs(get_pos(player)[0] - get_pos(enemy)[0]) <= 7: # and usable + not stunned
+            if not secondary_on_cooldown(player):
                 if get_last_move(player) and (get_secondary_skill(enemy) in ['hadoken', 'boomerang']):
-                    print(get_last_move(player))
-                    if get_last_move(player)[0] == 'move' and get_last_move(player)[1][0] == 0 and get_last_move(player)[1][1] == 0:
-
+                    if get_last_move(player)[1] == 'cooldown' and get_past_move(player, 2)[0] == 'move' and get_past_move(player, 2)[1][0] == 0 and get_past_move(player, 2)[1][1] == 0:
                         return SECONDARY
                 else:
                     return SECONDARY
@@ -74,7 +75,7 @@ class Script:
                 return BACK
             else:
                 return BACK        
-        elif abs((get_pos(enemy)[0] - get_pos(player)[0])) >= 7:
+        elif abs((get_pos(enemy)[0] - get_pos(player)[0])) > 7:
             if not secondary_on_cooldown(player) and ((get_hp(player) - get_hp(enemy)) < 20):
                 return FORWARD
 
@@ -83,13 +84,13 @@ class Script:
     # MAIN FUNCTION that returns a single move to the game manager
     def get_move(self, player, enemy, player_projectiles, enemy_projectiles):
         # return SECONDARY
-        # return self.get_thanh_strategy(player, enemy, player_projectiles, enemy_projectiles)
+        return self.get_thanh_strategy(player, enemy, player_projectiles, enemy_projectiles)
        
         if len(enemy_projectiles) > 0:
             if abs(enemy_projectiles[0].get_pos()[0] - get_pos(player)[0]) < 2:
                 if enemy_projectiles[0].get_pos()[1] == 0:
                     print('jump')
-                    return JUMP
+                    return JUMP_FORWARD
 
         if not secondary_on_cooldown(player):
             print(get_secondary_skill(enemy))
