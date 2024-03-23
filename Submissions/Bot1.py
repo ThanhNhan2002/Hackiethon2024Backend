@@ -4,14 +4,14 @@ from Game.projectiles import *
 from ScriptingHelp.usefulFunctions import *
 from Game.playerActions import defense_actions, attack_actions, projectile_actions
 from Game.gameSettings import HP, LEFTBORDER, RIGHTBORDER, LEFTSTART, RIGHTSTART, PARRYSTUN
-
+import random
 
 # PRIMARY CAN BE: Teleport, Super Saiyan, Meditate, Dash Attack, Uppercut, One Punch
 # SECONDARY CAN BE : Hadoken, Grenade, Boomerang, Bear Trap
 
 # TODO FOR PARTICIPANT: Set primary and secondary skill here
 PRIMARY_SKILL = TeleportSkill
-SECONDARY_SKILL = Hadoken
+SECONDARY_SKILL = Grenade
 
 #constants, for easier move return
 #movements
@@ -48,10 +48,9 @@ class Script:
     
     # MAIN FUNCTION that returns a single move to the game manager
     def get_move(self, player, enemy, player_projectiles, enemy_projectiles):
-        distance = abs(get_pos(player)[0] - get_pos(enemy)[0])
+        action_list = [JUMP, FORWARD, BACK, JUMP_BACKWARD, JUMP_FORWARD, LIGHT, HEAVY, BLOCK, PRIMARY, SECONDARY, CANCEL]
+        print(get_last_move(player))
+        # return JUMP
+        return random.choice(action_list)
 
-        if distance < 3:
-            return LIGHT
-        
-        return FORWARD
         
