@@ -10,7 +10,7 @@ import random
 # SECONDARY CAN BE : Hadoken, Grenade, Boomerang, Bear Trap, Super Saiyan, Super Armor
 
 # TODO FOR PARTICIPANT: Set primary and secondary skill here
-PRIMARY_SKILL = OnePunchSkill
+PRIMARY_SKILL = DashAttackSkill
 SECONDARY_SKILL = SuperSaiyanSkill
 
 #constants, for easier move return
@@ -57,10 +57,10 @@ class Script:
         # print(get_last_move(player), get_past_move(player, 1), get_past_move(player, 2))
 
         # return JUMP
-        return random.choice([JUMP_BACKWARD, BACK, PRIMARY, SECONDARY, BLOCK])
-        return random.choice(action_list)
-        if not get_secondary_cooldown(player):
-            return SECONDARY
+        # return random.choice([JUMP_BACKWARD, BACK, PRIMARY, SECONDARY, BLOCK])
+        # return random.choice(action_list)
+        # if not get_secondary_cooldown(player):
+            # return SECONDARY
         
         # return PRIMARY     
         # if distance > 5:

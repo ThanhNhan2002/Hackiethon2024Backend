@@ -50,6 +50,11 @@ class Script:
 
         distance = abs((get_pos(player)[0] - get_pos(enemy)[0]))
 
+        if get_primary_skill(enemy) == 'meditate':
+            hit_limit = 20
+        else:
+           hit_limit = 10 
+
         if len(enemy_projectiles) > 0:
             if get_projectile_type(enemy_projectiles[0]) == 'grenade' and abs(enemy_projectiles[0].get_pos()[0] - get_pos(player)[0]) <= 2:
                 return BACK
@@ -74,12 +79,12 @@ class Script:
                     return JUMP_BACKWARD
                 else:
                     return BLOCK 
-            elif (get_hp(player) - get_hp(enemy)) >= 20: 
+            elif (get_hp(player) - get_hp(enemy)) >= hit_limit: 
                 return BACK
             else:
                 return BACK        
         elif abs((get_pos(enemy)[0] - get_pos(player)[0])) > 7:
-            if not secondary_on_cooldown(player) and ((get_hp(player) - get_hp(enemy)) < 20):
+            if not secondary_on_cooldown(player) and ((get_hp(player) - get_hp(enemy)) < hit_limit):
                 return FORWARD
 
 # if staying too close
