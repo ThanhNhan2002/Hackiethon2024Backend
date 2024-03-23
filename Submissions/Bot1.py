@@ -10,8 +10,8 @@ import random
 # SECONDARY CAN BE : Hadoken, Grenade, Boomerang, Bear Trap, Super Saiyan,
 
 # TODO FOR PARTICIPANT: Set primary and secondary skill here
-PRIMARY_SKILL = Meditate
-SECONDARY_SKILL = Hadoken
+PRIMARY_SKILL = DashAttackSkill
+SECONDARY_SKILL = Boomerang
 
 #constants, for easier move return
 #movements
@@ -58,7 +58,7 @@ class Script:
 
         # return JUMP
 
-
+        return random.choice(action_list)
         if not get_secondary_cooldown(player):
             return SECONDARY
         

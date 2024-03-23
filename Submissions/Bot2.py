@@ -64,7 +64,7 @@ class Script:
             return PRIMARY
         elif abs(get_pos(player)[0] - get_pos(enemy)[0]) <= 7: # and usable + not stunned
             if not secondary_on_cooldown(player):
-                if get_last_move(player) and (get_secondary_skill(enemy) in ['hadoken', 'boomerang']):
+                if get_last_move(player) and (get_secondary_skill(enemy) in ['hadoken', 'boomerang'] and get_primary_skill(enemy) != 'dash_attack'):
                     if get_last_move(player)[1] == 'cooldown' and get_past_move(player, 2)[0] == 'move' and get_past_move(player, 2)[1][0] == 0 and get_past_move(player, 2)[1][1] == 0:
                         return SECONDARY
                 else:
