@@ -87,29 +87,13 @@ class Script:
             if not secondary_on_cooldown(player) and ((get_hp(player) - get_hp(enemy)) < hit_limit):
                 return FORWARD
 
-# if staying too close
 
     # MAIN FUNCTION that returns a single move to the game manager
     def get_move(self, player, enemy, player_projectiles, enemy_projectiles):
         # return SECONDARY
         return self.get_thanh_strategy(player, enemy, player_projectiles, enemy_projectiles)
        
-        if len(enemy_projectiles) > 0:
-            if abs(enemy_projectiles[0].get_pos()[0] - get_pos(player)[0]) < 2:
-                if enemy_projectiles[0].get_pos()[1] == 0:
-                    print('jump')
-                    return JUMP_FORWARD
 
-        if not secondary_on_cooldown(player):
-            print(get_secondary_skill(enemy))
-            # print(get_last_move(player), (get_secondary_skill(enemy) in ['hadoken', 'boomerang']))
-            if get_last_move(player) and (get_secondary_skill(enemy) in ['hadoken', 'boomerang']):
-                print(get_past_move(player, 1), get_past_move(player, 2), get_past_move(player, 3), get_last_move(player))
-                if get_last_move(player)[1] == 'cooldown' and get_past_move(player, 2)[0] == 'move' and get_past_move(player, 2)[1][0] == 0 and get_past_move(player, 2)[1][1] == 0:
-                
-                    return SECONDARY
-            else:
-                return SECONDARY
 
 
         
